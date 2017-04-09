@@ -16,7 +16,7 @@ class Apartment extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'county_id', 'price', 'currency', 'description', 'stars'
+        'name', 'county_id', 'price', 'description', 'stars'
     ];
 
     /**

@@ -54,20 +54,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="price" class="col-sm-2 control-label">Price</label>
+                                <label for="price" class="col-sm-2 control-label">Price (HRK)</label>
                                     <input id="price" name="price" placeholder="Price" type="number" step="0.1"
                                            class="form-control required email" value="{!! old('price') !!}" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="currency" class="control-label">
-                                    Choose the currency
-                                </label>
-                                <select id="currency" class="form-control" name="currency" required>
-                                    <option value="HRK">HRK</option>
-                                    <option value="EUR">EUR</option>
-                                    <option value="USD">USD</option>
-                                </select>
                             </div>
 
                             <div class="form-group">

@@ -44,7 +44,6 @@ $factory->define(App\Apartment::class, function (Faker\Generator $faker) {
         'stars' => $faker->numberBetween(1,5),
         'description' => $faker->text(150),
         'price' => $faker->numberBetween(1, 2000),
-        'currency' => 'HRK',
     ];
 });
 

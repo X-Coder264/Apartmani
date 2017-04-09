@@ -164,7 +164,7 @@
                                 </form>
             @foreach ($apartments as $apartment)
                 <div>
-                <a href="{{route("apartments.show", $apartment)}}">{{ $apartment->name }}</a>
+                <a href="{{route("apartments.show", $apartment)}}">{{ $apartment->name }} {{$apartment->price}} HRK ->  {{$apartment->eur_price}} EUR</a>
                 </div>
             @endforeach
             @if(!isset($_GET['numberPerPage']) || (isset($_GET['numberPerPage']) && $_GET['numberPerPage'] != 0))

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\County;
 use App\Apartment;
 use App\ApartmentFilters;
-use App\County;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,15 @@ class HomeController extends Controller
         }
 
         $counties = County::all();
+
+        foreach($apartments as $apartment) {
+            if (Cache::has('apartment.' . $apartment->slug . '.EUR_price')) {
+                $apartment->eur_price = Cache::get('apartment.' . $apartment->slug . '.EUR_price');
+            } else {
+                $apartment->eur_price = round($apartment->price * get_EUR_exchange_rate(), 2);
+                Cache::put('apartment.' . $apartment->slug . '.EUR_price', $apartment->eur_price, 24 * 60);
+            }
+        }
 
         return view('home', compact('apartments', 'counties'));
     }
