@@ -143,19 +143,19 @@
                                                         <option
                                                                 @if(isset($_GET['numberPerPage']) && $_GET['numberPerPage'] == 12)
                                                                 selected="selected"
-                                                                @endif value="12">12 proizvoda</option>
+                                                                @endif value="12">12 oglasa</option>
                                                         <option @if(isset($_GET['numberPerPage']) && $_GET['numberPerPage'] == 24)
                                                                 selected="selected"
-                                                                @endif value="24">24 proizvoda</option>
+                                                                @endif value="24">24 oglasa</option>
                                                         <option @if(isset($_GET['numberPerPage']) && $_GET['numberPerPage'] == 36)
                                                                 selected="selected"
-                                                                @endif value="36">36 proizvoda</option>
+                                                                @endif value="36">36 oglasa</option>
                                                         <option @if(isset($_GET['numberPerPage']) && $_GET['numberPerPage'] == 48)
                                                                 selected="selected"
-                                                                @endif value="48">48 proizvoda</option>
+                                                                @endif value="48">48 oglasa</option>
                                                         <option @if(isset($_GET['numberPerPage']) && $_GET['numberPerPage'] == 0)
                                                                 selected="selected"
-                                                                @endif value="0">sve proizvode</option>
+                                                                @endif value="0">sve oglase</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -164,7 +164,7 @@
                                 </form>
             @foreach ($apartments as $apartment)
                 <div>
-                {{ $apartment->name }}
+                <a href="{{route("apartments.show", $apartment)}}">{{ $apartment->name }}</a>
                 </div>
             @endforeach
             @if(!isset($_GET['numberPerPage']) || (isset($_GET['numberPerPage']) && $_GET['numberPerPage'] != 0))

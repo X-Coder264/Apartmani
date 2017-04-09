@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+
+div.navigation body {
+    font: 300 100% 'Helvetica Neue', Helvetica, Arial;
+}
+
+div.navigation .container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+div.navigation ul li {
+    display: inline;
+    text-align: center;
+}
+
+div.navigation a {
+    display: inline-block;
+    width: 25%;
+    padding: .75rem 0;
+    margin: 0;
+    text-decoration: none;
+    color: #333;
+}
+
+div.navigation .two:hover ~ hr {
+    margin-left: 25%;
+}
+
+div.navigation .three:hover ~ hr {
+    margin-left: 50%;
+}
+
+div.navigation .four:hover ~ hr {
+    margin-left: 75%;
+}
+
+div.navigation hr {
+    height: .25rem;
+    width: 25%;
+    margin: 0;
+    background: tomato;
+    border: none;
+    transition: .3s ease-in-out;
+}

@@ -24,7 +24,9 @@ class CreateApartmentsTable extends Migration
             $table->text('description');
             $table->decimal('price', 7, 2);
             $table->enum('currency', ["HRK", "EUR", "USD"]);
+            $table->string('main_image')->default('');
             $table->boolean('premium')->default(false);
+            $table->tinyInteger('validation')->default(0);
             $table->string('slug');
             $table->timestamps();
         });

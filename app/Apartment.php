@@ -34,10 +34,44 @@ class Apartment extends Model
     }
 
     /**
+     * Use the slug database column for implicit model binding.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * Get the user that owns the apartment.
      */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the comments for the apartment.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get the county that the apartment is located in.
+     */
+    public function county()
+    {
+        return $this->belongsTo(County::class);
+    }
+
+    /**
+     * Get the images of the apartment.
+     */
+    public function images()
+    {
+        return $this->hasMany(ApartmentImage::class);
     }
 }

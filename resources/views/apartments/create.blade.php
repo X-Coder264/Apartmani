@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <link href="/css/jquery.filer.css" type="text/css" rel="stylesheet" />
+    <link href="/css/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -84,11 +89,11 @@
                                           class="form-control required" required></textarea>
                             </div>
 
-                            {{--<div class="form-group">
+                            <div class="form-group">
                                 <div>Prva slika će biti glavna slika apartmana, a ostale slike će se vidjeti u oglasu u galeriji slika.</div>
                                 <label class="control-label">Odaberite slike</label>
                                 <input type="file" name="images[]" id="filer_input" accept="image/*" multiple>
-                            </div>--}}
+                            </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -101,5 +106,36 @@
 
     </section>
 </div>
+
+@endsection
+
+@section('scripts')
+    <script src="/js/jquery.filer.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#filer_input').filer({
+                limit: 10,
+                maxSize: 8,
+                extensions: ["jpg", "jpeg", "png", "gif"],
+                showThumbs: true,
+                addMore: true,
+                changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-folder"></i></div><div class="jFiler-input-text"><h3>Kliknite ovdje</h3> <span style="display:inline-block; margin: 15px 0">ili</span></div><a class="jFiler-input-choose-btn btn-custom blue-light">Birajte slike</a></div></div>',
+                theme: "dragdropbox",
+                templates: filer_default_opts.templates,
+                captions: {
+                    button: "Odaberi slike",
+                    feedback: "Odaberi slike",
+                    feedback2: "slike su odabrane",
+                    removeConfirmation: "Jeste li sigurni da želite obrisati ovu sliku?",
+                    errors: {
+                        filesLimit: "Možete uploadati najviše 10 slika po apartmanu.",
+                        filesType: "Samo .jpg, .jpeg, .png i .gif slike su dopuštene.",
+                        filesSize: "Slika je prevelika. Najveća veličina pojedine slike je 5 MB.",
+                        filesSizeAll: "Files you've choosed are too large! Please upload files up to 5 MB."
+                    }
+                }
+            });
+        });
+    </script>
 
 @endsection

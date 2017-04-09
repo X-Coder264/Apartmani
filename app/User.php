@@ -44,6 +44,24 @@ class User extends Authenticatable
     }
 
     /**
+     * Use the slug database column for implicit model binding.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Get the apartments of the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
      * Get the apartments of the user.
      */
     public function apartments()

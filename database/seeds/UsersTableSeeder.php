@@ -20,14 +20,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456', ['rounds' => 15]),
-            'admin' => true
+            'role_id' => 1
         ]);
 
         User::create([
             'name' => 'User',
-            'email' => 'user@gmail.com',
+            'email' => 'zdencec52@gmail.com',
             'password' => Hash::make('123456', ['rounds' => 15]),
-            'admin' => false
+            'role_id' => 2
         ]);
 
         Model::reguard();
