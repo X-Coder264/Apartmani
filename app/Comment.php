@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     /**
-     * Get the user that owns the comments.
+     * Get the user that owns the comment.
      */
     public function user()
     {
