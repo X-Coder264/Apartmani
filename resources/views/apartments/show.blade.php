@@ -30,7 +30,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     @foreach($apartment->comments as $comment)
                         <div class="row">
-                            {{$comment->comment}}
+                            {{$comment->comment}} - {{$comment->user->name}} - {{$comment->created_at->diffForHumans()}}
                         </div>
                     @endforeach
                 </div>

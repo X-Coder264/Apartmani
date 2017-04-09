@@ -73,7 +73,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $apartment->load('user', 'comments');
+        $apartment->load('user', 'comments.user');
         return view('apartments.show', ['apartment' => $apartment]);
     }
 }
