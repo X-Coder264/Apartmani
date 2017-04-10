@@ -75,9 +75,9 @@ class ApartmentController extends Controller
     {
         $apartment->load('user', 'comments.user', 'ratings');
         $number_of_ratings = $apartment->ratings->count();
+        $current_user_rated = false;
         if ($number_of_ratings > 0) {
             $average_rating = $apartment->ratings->avg('rating');
-            $current_user_rated = false;
             $user_rating = 0;
 
             if (Auth::check()) {
@@ -94,6 +94,6 @@ class ApartmentController extends Controller
                 compact('apartment', 'number_of_ratings', 'average_rating', 'current_user_rated', 'user_rating'));
         }
 
-        return view('apartments.show', compact('apartment', 'number_of_ratings'));
+        return view('apartments.show', compact('apartment', 'number_of_ratings', 'current_user_rated'));
     }
 }
