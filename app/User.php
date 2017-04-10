@@ -68,4 +68,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Apartment::class);
     }
+
+    /**
+     * Get the ratings that this user gave.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

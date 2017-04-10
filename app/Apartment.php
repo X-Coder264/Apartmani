@@ -74,4 +74,12 @@ class Apartment extends Model
     {
         return $this->hasMany(ApartmentImage::class);
     }
+
+    /**
+     * Get the ratings of the apartment.
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

@@ -1,14 +1,100 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <style>
+        @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
+        fieldset, label { margin: 0; padding: 0; }
+
+        /****** Style Star Rating Widget *****/
+
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating > input { display: none; }
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating > input:checked ~ label, /* show gold star when clicked */
+        .rating:not(:checked) > label:hover, /* hover current star */
+        .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+        .rating > input:checked + label:hover, /* hover current star when changing rating */
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+        .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="container">
 
         <section class="content">
+            @if (session('success'))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+            @endif
+        {{$apartment->name}} - {{$apartment->user->name}} <br>
 
-        {{$apartment->name}} - {{$apartment->user->name}}
+         @if($number_of_ratings)
+             <div>Prosječna ocjena: {{$average_rating}}  Broj glasova: {{$number_of_ratings}}</div>
+         @else
+             <div>Ovaj apartman još nije ocjenjen.</div>
+         @endif
 
         @if(Auth::check())
+        <div class="row">
+            <form method="POST" action="{{route("apartments.rate", $apartment)}}" id="rating">
+                {{ csrf_field() }}
+                <fieldset class="rating">
+                    <input type="radio" id="star5" name="rating" value="5.0" @if($current_user_rated && $user_rating == 5.0) checked @endif>
+                    <label class="full" for="star5" title="Savršeno - ocjena 5"></label>
+                    <input type="radio" id="star4half" name="rating" value="4.5" @if($current_user_rated && $user_rating == 4.5) checked @endif>
+                    <label class="half" for="star4half" title="Odlično - ocjena 4.5"></label>
+                    <input type="radio" id="star4" name="rating" value="4.0" @if($current_user_rated && $user_rating == 4.0) checked @endif>
+                    <label class="full" for="star4" title="Jako dobro - ocjena 4"></label>
+                    <input type="radio" id="star3half" name="rating" value="3.5" @if($current_user_rated && $user_rating == 3.5) checked @endif>
+                    <label class="half" for="star3half" title="Dobro - ocjena 3.5"></label>
+                    <input type="radio" id="star3" name="rating" value="3.0" @if($current_user_rated && $user_rating == 3.0) checked @endif>
+                    <label class="full" for="star3" title="Prosječno - ocjena 3"></label>
+                    <input type="radio" id="star2half" name="rating" value="2.5" @if($current_user_rated && $user_rating == 2.5) checked @endif>
+                    <label class="half" for="star2half" title="Ispodprosječno - ocjena 2.5"></label>
+                    <input type="radio" id="star2" name="rating" value="2.0" @if($current_user_rated && $user_rating == 2.0) checked @endif>
+                    <label class="full" for="star2" title="Loše - ocjena 2"></label>
+                    <input type="radio" id="star1half" name="rating" value="1.5" @if($current_user_rated && $user_rating == 1.5) checked @endif>
+                    <label class="half" for="star1half" title="Jako loše - ocjena 1.5"></label>
+                    <input type="radio" id="star1" name="rating" value="1.0" @if($current_user_rated && $user_rating == 1.0) checked @endif>
+                    <label class="full" for="star1" title="Užasno - ocjena 1"></label>
+                    <input type="radio" id="starhalf" name="rating" value="0.5" @if($current_user_rated && $user_rating == 0.5) checked @endif>
+                    <label class="half" for="starhalf" title="Katastrofa - ocjena 0.5"></label>
+                </fieldset>
+            </form>
+        </div>
+
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <form method="POST" action="{{route("comments.store", $apartment)}}">
@@ -39,4 +125,12 @@
         </section>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $('#rating input').change(function() {
+            $(this).closest('form').submit();
+        });
+    </script>
 @endsection

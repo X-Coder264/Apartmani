@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/apartments/create', 'ApartmentController@create')->name('apartments.create');
     Route::post('/apartments/store', 'ApartmentController@store')->name('apartments.store');
     Route::post('/apartments/{apartment}/comment/store', 'CommentController@store')->name('comments.store');
+    Route::post('/apartments/{apartment}/rate', 'RatingController@store')->name('apartments.rate');
 });
 
 Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
