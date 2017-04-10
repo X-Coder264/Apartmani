@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function index(ApartmentFilters $filters)
     {
-        if(empty($filters->filters())) {
+        if (empty($filters->filters())) {
             $apartments = Apartment::orderBy('created_at', 'desc')->paginate(12);
         } else {
             $apartments = Apartment::filter($filters);
@@ -27,12 +27,12 @@ class HomeController extends Controller
 
         $counties = County::all();
 
-        foreach($apartments as $apartment) {
+        foreach ($apartments as $apartment) {
             if (Cache::has('apartment.' . $apartment->slug . '.EUR_price')) {
-                $apartment->eur_price = Cache::get('apartment.' . $apartment->slug . '.EUR_price');
+                $apartment->EUR_price = Cache::get('apartment.' . $apartment->slug . '.EUR_price');
             } else {
-                $apartment->eur_price = round($apartment->price * get_EUR_exchange_rate(), 2);
-                Cache::put('apartment.' . $apartment->slug . '.EUR_price', $apartment->eur_price, 24 * 60);
+                $apartment->EUR_price = round($apartment->price * get_EUR_exchange_rate(), 2);
+                Cache::put('apartment.' . $apartment->slug . '.EUR_price', $apartment->EUR_price, 24 * 60);
             }
         }
 

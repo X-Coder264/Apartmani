@@ -9,9 +9,9 @@ trait Filterable
     /**
      * Filter a result set.
      *
-     * @param  Builder      $query
+     * @param  Builder $query
      * @param  QueryFilters $filters
-     * @return Builder
+     * @return \Illuminate\Database\Eloquent\Collection | \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function scopeFilter($query, QueryFilters $filters)
     {

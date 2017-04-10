@@ -14,7 +14,7 @@ class ApartmentFilters extends QueryFilters
      */
     public function orderBy($order = 0)
     {
-        if($order == 0) {
+        if ($order == 0) {
             return $this->builder->orderBy('created_at', 'desc');
         } elseif ($order == 1) {
             return $this->builder->orderBy('created_at', 'asc');
@@ -55,7 +55,7 @@ class ApartmentFilters extends QueryFilters
      */
     public function county($county = 0)
     {
-        if($county != 0) {
+        if ($county != 0) {
             return $this->builder->where('county_id', $county);
         } else {
             return $this->builder;
@@ -70,7 +70,7 @@ class ApartmentFilters extends QueryFilters
      */
     public function stars($stars = 0)
     {
-        if($stars != 0) {
+        if ($stars != 0) {
             return $this->builder->where('stars', '=', $stars);
         } else {
             return $this->builder;

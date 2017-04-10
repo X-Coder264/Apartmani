@@ -51,7 +51,7 @@ class ApartmentController extends Controller
                 return back()->with(['error' => "Dogodila se greška. Molimo pokušajte kasnije."]);
             }
 
-            if($key == 0) {
+            if ($key == 0) {
                 $apartment->main_image = $name;
                 $apartment->save();
             } else {
@@ -68,26 +68,30 @@ class ApartmentController extends Controller
     /**
      * Show the apartment.
      *
-     * @param  Apartment  $apartment
+     * @param  Apartment $apartment
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment)
     {
         $apartment->load('user', 'comments.user', 'ratings');
         $number_of_ratings = $apartment->ratings->count();
-        if($number_of_ratings > 0) {
+        if ($number_of_ratings > 0) {
             $average_rating = $apartment->ratings->avg('rating');
             $current_user_rated = false;
             $user_rating = 0;
-            $user_id = Auth::user()->id;
 
-            foreach ($apartment->ratings as $rating) {
-                if($rating->user_id === $user_id) {
-                    $current_user_rated = true;
-                    $user_rating = $rating->rating;
+            if (Auth::check()) {
+                $user_id = Auth::user()->id;
+
+                foreach ($apartment->ratings as $rating) {
+                    if ($rating->user_id === $user_id) {
+                        $current_user_rated = true;
+                        $user_rating = $rating->rating;
+                    }
                 }
             }
-            return view('apartments.show', compact('apartment', 'number_of_ratings', 'average_rating', 'current_user_rated', 'user_rating'));
+            return view('apartments.show',
+                compact('apartment', 'number_of_ratings', 'average_rating', 'current_user_rated', 'user_rating'));
         }
 
         return view('apartments.show', compact('apartment', 'number_of_ratings'));

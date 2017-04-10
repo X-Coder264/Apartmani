@@ -20,7 +20,7 @@ class RatingController extends Controller
     {
         $user = Auth::user();
         $rating = Rating::where('user_id', '=', $user->id)->where('apartment_id', '=', $apartment->id)->first();
-        if(! $rating) {
+        if (! $rating) {
             $rating = new Rating();
             $rating->rating = $request->input('rating');
             $rating->user_id = $user->id;
