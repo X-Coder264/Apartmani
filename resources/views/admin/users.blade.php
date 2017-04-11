@@ -51,7 +51,7 @@
             $('#moderator-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{route ('admin.usersDatatables')}}',
+                ajax: '{{route ('admin.users.datatable')}}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},

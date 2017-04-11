@@ -14,10 +14,10 @@
             <div class="panel-body">
 
                     <label class="control-label">Korisnik</label> <br>
-                    <a href="{{ route('admin.users.user', $apartment -> user -> slug ) }}">{{ $apartment -> user -> name }}</a> <br> <br>
+                    <a href="{{ route('admin.users.user', $apartment -> user -> slug) }}">{{ $apartment -> user -> name }}</a> <br> <br>
 
 
-                <form action="{{ url('/admin/users/' . $apartment->user->slug .'/'.$apartment->slug . '/edit') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.users.user.apartment.response', [$apartment -> user -> slug, $apartment->slug]) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -43,7 +43,7 @@
                         <label for="county_id" class="control-label">Županija</label>
                         <select id="county_id" class="form-control" name="county_id" required>
                             @foreach($counties as $county)
-                                <option value="{{$county->id}}">{{$county->name}}</option>
+                                <option value="{{$county->id}}" @if( $county->id == $apartment->county_id) selected @endif>{{$county->name}}</option>
                             @endforeach
                         </select>
                     </div>

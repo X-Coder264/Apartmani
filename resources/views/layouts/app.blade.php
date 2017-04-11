@@ -56,7 +56,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             @if(Auth::user()->role->role == "Admin")
-                                <li><a href="{{ route('admin') }}">Admin CP</a></li>
+                                <li><a href="{{ route('admin.moderator.index') }}">Admin CP</a></li>
                             @endif
 
                             <li class="dropdown">

@@ -24,14 +24,19 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
 
-Route::get('/admin', ['as' => 'admin', 'uses' => 'AdminController@index',]);
-Route::get('/admin/moderator', ['as' => 'admin.moderator', 'uses' => 'AdminController@getModeratorData']);
-Route::get('/admin/users', ['as' => 'admin.users', 'uses' => 'AdminController@getUsers']);
-Route::get('/admin/usersDatatables', ['as' => 'admin.usersDatatables', 'uses' => 'AdminController@getUsersData']);
-Route::get('/admin/users/{user}', ['as' => 'admin.users.user', 'uses' => 'AdminController@showUser']);
-Route::post('/admin/users/{user}/update', ['uses' => 'AdminController@updateUser']);
-Route::get('/admin/users/{user}/{apartments}/edit', ['as' => 'admin.users.user.apartment.edit', 'uses' => 'AdminController@showUsersApartment']);
-Route::post('/admin/users/{user}/{apartments}/edit', ['uses' => 'AdminController@editUsersApartment']);
-Route::get('/admin/{apartment}', ['as' => 'admin.moderator.apartment', 'uses' => 'AdminController@showApartment']);
-Route::post('/admin/{apartment}/response', 'AdminController@getApartmentResponse');
-Route::get('/admin/usersDatatables/{user}/active-ads/{adType}', ['as' => 'admin.usersDatatables.activeAds', 'uses' => 'AdminController@getUsersActiveAds']);
+/*Admin*/
+Route::get('/admin/moderator', ['as' => 'admin.moderator.index', 'uses' => 'Admin\ModeratorController@index',]);
+Route::get('/admin/moderator/datatable', ['as' => 'admin.moderator.datatable', 'uses' => 'Admin\ModeratorController@showDatatables']);
+Route::get('/admin/moderator/{apartment}', ['as' => 'admin.moderator.apartment', 'uses' => 'Admin\ModeratorController@show']);
+Route::post('/admin/moderator/{apartment}/response', ['as' => 'admin.moderator.apartment.response', 'uses' => 'Admin\ModeratorController@update']);
+
+Route::get('/admin/users', ['as' => 'admin.users.index', 'uses' => 'Admin\UserController@index']);
+Route::get('/admin/users/datatable', ['as' => 'admin.users.datatable', 'uses' => 'Admin\UserController@showDatatables']);
+Route::get('/admin/users/datatable/{user}/ads/{adType}', ['as' => 'admin.users.datatable.ads', 'uses' => 'Admin\UserController@showDatatablesApartments']);
+
+Route::get('/admin/users/{user}', ['as' => 'admin.users.user', 'uses' => 'Admin\UserController@show']);
+Route::post('/admin/users/{user}/update', ['as' => 'admin.users.user.response', 'uses' => 'Admin\UserController@update']);
+
+Route::get('/admin/users/{user}/{apartment}/edit', ['as' => 'admin.users.user.apartment', 'uses' => 'Admin\UserController@edit']);
+Route::post('/admin/users/{user}/{apartment}/update', ['as' => 'admin.users.user.apartment.response', 'uses' => 'Admin\UserController@updateApartment']);
+
