@@ -47,26 +47,6 @@ class ModeratorController extends Controller
             ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Shows apartment ad for verification
@@ -80,16 +60,6 @@ class ModeratorController extends Controller
         return view('admin.moderator-apartment', ['apartment' => $apartment ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Updates apartments validation value in database, depending if it passed validation or not.
@@ -117,14 +87,4 @@ class ModeratorController extends Controller
         return redirect(route('admin.moderator.index'))->with('success', 'Oglas je validiran!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
