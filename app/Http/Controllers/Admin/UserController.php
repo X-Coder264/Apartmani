@@ -12,6 +12,16 @@ use Yajra\Datatables\Facades\Datatables;
 class UserController extends Controller
 {
     /**
+     * Checks if user is authorized to access
+     *
+     * ModeratorController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
