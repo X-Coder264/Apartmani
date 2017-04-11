@@ -95,6 +95,10 @@
             </form>
         </div>
 
+                @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
+                    <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a>
+                @endif
+
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <form method="POST" action="{{route("comments.store", $apartment)}}">

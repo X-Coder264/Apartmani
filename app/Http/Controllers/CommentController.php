@@ -18,6 +18,8 @@ class CommentController extends Controller
      */
     public function store(Request $request, Apartment $apartment)
     {
+        // TODO: add validation
+
         $comment = new Comment();
 
         $comment->comment = $request->input('comment');

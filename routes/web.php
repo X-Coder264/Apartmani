@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/apartments/create', 'ApartmentController@create')->name('apartments.create');
     Route::post('/apartments/store', 'ApartmentController@store')->name('apartments.store');
+    Route::get('/apartments/{apartment}/edit', 'ApartmentController@edit')->name('apartments.edit');
+    Route::post('/apartments/{apartment}', 'ApartmentController@update')->name('apartments.update');
     Route::post('/apartments/{apartment}/comment/store', 'CommentController@store')->name('comments.store');
     Route::post('/apartments/{apartment}/rate', 'RatingController@store')->name('apartments.rate');
 });

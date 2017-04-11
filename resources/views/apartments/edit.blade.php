@@ -2,32 +2,34 @@
 
 @section('content')
 
-    @include('partials.navigation-admin')
-
-    <div class="container col-md-8" style="text-align: center">
+    <div class="container col-md-12" style="text-align: center">
 
         <div class="panel panel-info">
+            @if (session('success'))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="panel-heading">
                 <h3 class="panel-title"> {{ $apartment->name }} </h3>
             </div>
 
             <div class="panel-body">
-
-                    <label class="control-label">Korisnik</label> <br>
-                    <a href="{{ route('admin.users.user', $apartment->user->slug ) }}">{{ $apartment->user->name }}</a> <br> <br>
-
-
-                <form action="{{ url('/admin/users/' . $apartment->user->slug .'/'.$apartment->slug . '/edit') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route("apartments.update", $apartment) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label class="control-label">Opis</label>
+                        <label for="description" class="control-label">Opis</label>
                         <textarea id="description" name="description"  class="form-control">{{ $apartment->description }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="price" class="control-label">Cijena (HRK)</label> <br>
-                        <input id="price" name="price" type="text" class="form-control" value="{{ $apartment->price }}">
+                        <input id="price" name="price" type="number" step="0.1" class="form-control" value="{{ $apartment->price }}">
                     </div>
 
                     <div class="form-group">
@@ -44,7 +46,7 @@
                             Zvijezde
                         </label>
                         <select id="stars" class="form-control" name="stars" required>
-                            @for ($i = 1; $i<6; $i++)
+                            @for ($i = 1; $i < 6; $i++)
                                 <option value="{{$i}}" @if( $apartment->stars == $i) selected @endif >{{$i}}</option>
                             @endfor
                         </select>
@@ -55,10 +57,8 @@
                     <label class="control-label">Zadnja promjena</label> <br>
                     <p>{{ $apartment->updated_at->diffForHumans() }}</p>
 
-                    <div class="form-group col-md-4 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary col-md-3" name="button" value="update">Izmijeni</button>
-                        <button type="submit" class="btn btn-danger col-md-3 col-md-offset-1" name="button" value="delete">Obriši</button>
-                        <button type="submit" class="btn btn-warning col-md-3 col-md-offset-1" name="button" value="block">Zabrani</button>
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary" name="button" value="update">Izmijeni</button>
                     </div>
 
                 </form>

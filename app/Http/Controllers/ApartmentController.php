@@ -33,6 +33,8 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: add validation
+
         $data = $request->except('images');
         $apartment = Auth::user()->apartments()->create($data);
 
@@ -95,5 +97,36 @@ class ApartmentController extends Controller
         }
 
         return view('apartments.show', compact('apartment', 'number_of_ratings', 'current_user_rated'));
+    }
+
+    /**
+     * Show the apartment edit form.
+     *
+     * @param  Apartment $apartment
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Apartment $apartment)
+    {
+        $counties = County::all();
+
+        return view('apartments.edit', compact('apartment','counties'));
+    }
+
+    /**
+     * Update the apartment.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  Apartment $apartment
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Apartment $apartment)
+    {
+        // TODO: add validation
+        $apartment->price = $request->price;
+        $apartment->description = $request->description;
+        $apartment->county_id = $request->county_id;
+        $apartment->stars = $request->stars;
+        $apartment->save();
+        return back()->with('success', "Promjene su uspješno spremljene.");
     }
 }
