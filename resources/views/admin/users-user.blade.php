@@ -12,7 +12,7 @@
             </div>
 
             <div class="panel-body">
-                <form action="{{ url('/admin/users/' . $user ->slug . '/update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.users.user.response', $user -> slug ) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
 
@@ -156,7 +156,7 @@
             $('#active-ads-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url(action('AdminController@getUsersActiveAds', ['user' => $user->slug ,'adType' => 1])) }}',
+                ajax: '{{ route('admin.users.datatable.ads', ['user' => $user->slug ,'adType' => 1]) }}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
@@ -172,7 +172,7 @@
             $('#inactive-ads-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url(action('AdminController@getUsersActiveAds', ['user' => $user->slug ,'adType' => 2])) }}',
+                ajax: '{{ route('admin.users.datatable.ads', ['user' => $user->slug ,'adType' => 2]) }}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
@@ -188,7 +188,7 @@
             $('#banned-ads-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url(action('AdminController@getUsersActiveAds', ['user' => $user->slug ,'adType' => -1])) }}',
+                ajax: '{{ route('admin.users.datatable.ads', ['user' => $user->slug ,'adType' => -1]) }}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},

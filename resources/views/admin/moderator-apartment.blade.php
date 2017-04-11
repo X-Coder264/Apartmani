@@ -33,7 +33,7 @@
                 <a href="{{ route('admin.users.user', $apartment -> user -> slug ) }}">{{ $apartment -> user -> name }}</a> <br> <br>
             </div>
 
-            <form method="POST" action="{{ url('/admin/' . $apartment ->slug . '/response') }}">
+            <form method="POST" action="{{ route('admin.moderator.apartment.response', $apartment->slug) }}">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" value="Dozvoli" name="button">Dozvoli</button>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="well">
-            <form method="POST" action="{{ url('/admin/' . $apartment ->slug . '/response') }}">
+            <form method="POST" action="{{ route('admin.moderator.apartment.response', $apartment->slug) }}">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="description" class="col-sm-2 control-label">Poruka</label>
