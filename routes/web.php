@@ -42,3 +42,11 @@ Route::post('/admin/users/{user}/update', ['as' => 'admin.users.user.response', 
 Route::get('/admin/users/{user}/{apartment}/edit', ['as' => 'admin.users.user.apartment', 'uses' => 'Admin\UserController@edit']);
 Route::post('/admin/users/{user}/{apartment}/update', ['as' => 'admin.users.user.apartment.response', 'uses' => 'Admin\UserController@updateApartment']);
 
+
+
+Route::get('/admin/report', ['as' => 'admin.report.index', 'uses' => 'Admin\ReportController@index',]);
+
+
+
+Route::get('/analytics', ['as' => 'admin.analytics.index']);
+

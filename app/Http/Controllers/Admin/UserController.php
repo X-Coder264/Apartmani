@@ -135,5 +135,5 @@ class UserController extends Controller
 
         return redirect(route('admin.users.user', $slugUser));
     }
-    
+
 }

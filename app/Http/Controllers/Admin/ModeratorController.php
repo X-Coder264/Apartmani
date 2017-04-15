@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Yajra\Datatables\Facades\Datatables;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class ModeratorController extends Controller
 {
+
+
     /**
      * Checks if user is authorized to access
      *
@@ -56,6 +60,8 @@ class ModeratorController extends Controller
      */
     public function show($slug)
     {
+        Log::info('POkazuje Aprtman.', ['apartment' => $slug]);
+
         $apartment = Apartment::where('slug', '=', $slug)->first();
         return view('admin.moderator-apartment', ['apartment' => $apartment ]);
     }

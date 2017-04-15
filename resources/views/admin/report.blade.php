@@ -12,18 +12,18 @@
 
         <div class="col-md-8">
 
-            <h3>Korisnici</h3>
+            <h3>Izvješće</h3>
 
             <div id="users-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer ">
 
                 <div class="panel-body flip-scroll">
-                    <table class="table table-bordered table-hover flip-content" id="moderator-table">
+                    <table class="table table-bordered table-hover flip-content" id="report-table">
                         <thead>
                         <tr class="filters">
                             <th>Id</th>
                             <th>Ime</th>
-                            <th>E-mail</th>
-                            <th>Role</th>
+                            <th>Opis</th>
+                            <th>Datum</th>
                             <th>Opcije</th>
                         </tr>
                         </thead>
@@ -47,22 +47,22 @@
     <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap.js') }}" ></script>
 
     <script>
-        $(function() {
-            $('#moderator-table').DataTable({
+       /* $(function() {
+            $('#report-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{route ('admin.users.datatable')}}',
+                ajax: '{{route ('admin.moderator.datatable')}}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'role.role', name: 'role.role'},
+                    {data: 'description', name: 'description'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
 
         });
-
+*/
     </script>
 
 @endsection
