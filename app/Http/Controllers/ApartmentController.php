@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\ApartmentAvailability;
 use App\County;
 use App\Apartment;
+use Carbon\Carbon;
 use App\ApartmentImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +37,23 @@ class ApartmentController extends Controller
     {
         // TODO: add validation
 
+        $dates = [];
+        $x = 0;
+        //Extracts from date range to dates
+        foreach ($request->daterange as $daterange) {
+            $dateStart = $dateEnd = "";
+            for ($i = 0; $i < strlen($daterange); $i++) {
+                $dateEnd .= $daterange[$i];
+                if ($i == 9) {
+                    $dateStart = $dateEnd;
+                    $dateEnd = "";
+                    $i = $i + 3;
+                }
+            }
+            $dates[$x]["start_date"] = Carbon::createFromFormat('d.m.Y', $dateStart);
+            $dates[$x++]["end_date"] = Carbon::createFromFormat('d.m.Y', $dateEnd);
+        }
+
         $data = $request->except('images');
         $apartment = Auth::user()->apartments()->create($data);
 
@@ -64,6 +83,10 @@ class ApartmentController extends Controller
             }
         });
 
+        foreach ($dates as $date) {
+            $apartment->availability()->save(new ApartmentAvailability(['start_date' => $date["start_date"], 'end_date' => $date["end_date"]]));
+        }
+
         return back()->with('success', "The apartment is successfully submitted.");
     }
 
@@ -75,9 +98,18 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $apartment->load('user', 'comments.user', 'ratings');
+        $apartment->load('user', 'comments.user', 'ratings', 'availability');
         $number_of_ratings = $apartment->ratings->count();
         $current_user_rated = false;
+
+        $dates = [];
+
+        foreach ($apartment->availability as $availability) {
+            for($date = $availability->start_date; $date->lte($availability->end_date); $date->addDay()) {
+                $dates[] = $date->format('m/d/Y');
+            }
+        }
+
         if ($number_of_ratings > 0) {
             $average_rating = $apartment->ratings->avg('rating');
             $user_rating = 0;
@@ -93,10 +125,10 @@ class ApartmentController extends Controller
                 }
             }
             return view('apartments.show',
-                compact('apartment', 'number_of_ratings', 'average_rating', 'current_user_rated', 'user_rating'));
+                compact('apartment', 'number_of_ratings', 'average_rating', 'current_user_rated', 'user_rating', 'dates'));
         }
 
-        return view('apartments.show', compact('apartment', 'number_of_ratings', 'current_user_rated'));
+        return view('apartments.show', compact('apartment', 'number_of_ratings', 'current_user_rated', 'dates'));
     }
 
     /**
@@ -107,9 +139,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $counties = County::all();
-
-        return view('apartments.edit', compact('apartment','counties'));
+        if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin") {
+            $counties = County::all();
+            return view('apartments.edit', compact('apartment','counties'));
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -121,12 +156,16 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        // TODO: add validation
-        $apartment->price = $request->price;
-        $apartment->description = $request->description;
-        $apartment->county_id = $request->county_id;
-        $apartment->stars = $request->stars;
-        $apartment->save();
-        return back()->with('success', "Promjene su uspješno spremljene.");
+        if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin") {
+            // TODO: add validation
+            $apartment->price = $request->price;
+            $apartment->description = $request->description;
+            $apartment->county_id = $request->county_id;
+            $apartment->stars = $request->stars;
+            $apartment->save();
+            return back()->with('success', "Promjene su uspješno spremljene.");
+        } else {
+            return back()->with('error', "Nemate prava za izmjeniti ovaj oglas.");
+        }
     }
 }

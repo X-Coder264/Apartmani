@@ -3,6 +3,7 @@
 @section('stylesheets')
     <link href="/css/jquery.filer.css" type="text/css" rel="stylesheet" />
     <link href="/css/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" />
 @endsection
 
 @section('content')
@@ -38,14 +39,14 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                <label for="name" class="col-sm-2 control-label">Naslov oglasa</label>
                                 <input id="name" name="name" type="text"
                                        placeholder="Name" class="form-control required"
                                        value="{!! old('name') !!}" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="county_id" class="col-sm-2 control-label">County</label>
+                                <label for="county_id" class="col-sm-2 control-label">Županija</label>
                                 <select id="county_id" class="form-control" name="county_id" required>
                                     @foreach($counties as $county)
                                         <option value="{{$county->id}}">{{$county->name}}</option>
@@ -54,14 +55,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="price" class="col-sm-2 control-label">Price (HRK)</label>
-                                    <input id="price" name="price" placeholder="Price" type="number" step="0.1"
+                                <label for="price" class="col-sm-2 control-label">Cijena (HRK)</label>
+                                    <input id="price" name="price" placeholder="Cijena" type="number" step="0.1"
                                            class="form-control required email" value="{!! old('price') !!}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="stars" class="control-label">
-                                    How many stars does your apartment have?
+                                    Koliko zvjezdica ima Vaš apartman?
                                 </label>
                                 <select id="stars" class="form-control" name="stars" required>
                                     <option value="1">1</option>
@@ -73,9 +74,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description" class="col-sm-2 control-label">Description</label>
-                                <textarea id="description" name="description" placeholder="Description"
+                                <label for="description" class="col-sm-2 control-label">Opis</label>
+                                <textarea id="description" name="description" placeholder="Opis"
                                           class="form-control required" required></textarea>
+                            </div>
+
+                            <div class="form-group" id="dates">
+                                <label class="control-label">Razdoblje zauzetosti apartmana: </label> <br>
+                                <input class="form-control" type="text" name="daterange[]" style="text-align: center">
+                                <div class="btn-group pull-right">
+                                    <span class="btn btn-default btn-md" id="addBtn">Dodaj polje</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -99,9 +108,37 @@
 @endsection
 
 @section('scripts')
+    <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('input[name="daterange[]"]').daterangepicker({
+                "showDropdowns": true,
+                "locale": {
+                    "format": "DD.MM.YYYY"
+                }
+            });
+        });
+    </script>
     <script src="/js/jquery.filer.min.js"></script>
     <script>
+        var x = 1;
         $(document).ready(function() {
+            $("#addBtn").click(function(){
+                $("#dates").append('<div><input class="form-control" type="text" name="daterange[]" id="daterange' + x + '" style="text-align: center"><td><span class="btn btn-danger btn-md center-block" id="removeBtn">Izbriši</span></div>');
+                $('#daterange' + x++ + '').daterangepicker({
+                    "showDropdowns": true,
+                    "locale": {
+                        "format": "DD.MM.YYYY"
+                    }
+                });
+            });
+
+            $("#dates").on('click','#removeBtn',function(){
+                $(this).parent().remove();
+            });
+
             $('#filer_input').filer({
                 limit: 10,
                 maxSize: 8,

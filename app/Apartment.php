@@ -53,6 +53,14 @@ class Apartment extends Model
     }
 
     /**
+     * Get the availability of the apartment.
+     */
+    public function availability()
+    {
+        return $this->hasMany(ApartmentAvailability::class);
+    }
+
+    /**
      * Get the comments for the apartment.
      */
     public function comments()

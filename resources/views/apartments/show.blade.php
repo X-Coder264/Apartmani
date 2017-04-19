@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('stylesheets')
+    <link href="/css/bootstrap-datepicker3.standalone.min.css" type="text/css" rel="stylesheet" />
     <style>
         @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
         fieldset, label { margin: 0; padding: 0; }
@@ -65,6 +66,8 @@
          @else
              <div>Ovaj apartman još nije ocjenjen.</div>
          @endif
+
+         <div id="datepicker"></div>
 
         @if(Auth::check())
         <div class="row">
@@ -137,4 +140,15 @@
             $(this).closest('form').submit();
         });
     </script>
+
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $('#datepicker').datepicker({
+            datesDisabled: [
+                @foreach($dates as $date)
+                    new Date('{{$date}}'),
+                @endforeach
+            ]
+        });</script>
+
 @endsection

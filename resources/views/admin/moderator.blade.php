@@ -2,7 +2,6 @@
 
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap.css') }}" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 @endsection
 
 @section('content')

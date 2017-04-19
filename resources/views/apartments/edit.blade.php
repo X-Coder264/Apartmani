@@ -14,6 +14,15 @@
                     </div>
                 </div>
             @endif
+            @if (session('error'))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="panel-heading">
                 <h3 class="panel-title"> {{ $apartment->name }} </h3>
             </div>
