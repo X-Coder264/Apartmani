@@ -23,6 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = Hash::make('123456', ['rounds' => 15]),
         'remember_token' => str_random(10),
+        'created_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     ];
 });
 
@@ -44,6 +45,7 @@ $factory->define(App\Apartment::class, function (Faker\Generator $faker) {
         'stars' => $faker->numberBetween(1,5),
         'description' => $faker->text(150),
         'price' => $faker->numberBetween(1, 2000),
+        'created_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     ];
 });
 

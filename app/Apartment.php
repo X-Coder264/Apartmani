@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Carbon\Carbon;
 
 class Apartment extends Model
 {
@@ -81,5 +82,16 @@ class Apartment extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Scope the query to records created this year.
+     *
+     * @param  Builder $query
+     * @return mixed
+     */
+    public function scopeThisYear($query)
+    {
+        return $query->where('created_at', '>=', Carbon::now()->firstOfYear());
     }
 }

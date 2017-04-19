@@ -44,7 +44,9 @@ Route::post('/admin/users/{user}/{apartment}/update', ['as' => 'admin.users.user
 
 
 
-Route::get('/admin/report', ['as' => 'admin.report.index', 'uses' => 'Admin\ReportController@index',]);
+Route::get('/admin/report', ['as' => 'admin.report.index', 'uses' => 'Admin\ReportController@index']);
+
+Route::post('/admin/report/filter', ['as' => 'admin.report.filter', 'uses' => 'Admin\ReportController@graphFilter']);
 
 
 
