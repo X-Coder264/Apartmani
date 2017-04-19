@@ -67,7 +67,9 @@
              <div>Ovaj apartman još nije ocjenjen.</div>
          @endif
 
+         @if(isset($dates) && ! empty($dates))
          <div id="datepicker"></div>
+         @endif
 
         @if(Auth::check())
         <div class="row">
