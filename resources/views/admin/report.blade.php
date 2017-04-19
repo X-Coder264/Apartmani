@@ -12,7 +12,7 @@
     <div class="container">
         <h1>Statistike</h1>
 
-        <p>Prikazuju se stvoreni broj korisnika ili apartmana za odabrano razdoblje.</p>
+        <p>Prikazuje se stvoreni broj korisnika ili apartmana za odabrano razdoblje.</p>
         <p>Za dane nema smisla birati raspon veći od mjesec dana ili za mjesece veći od godinu dana. U suprotnome će se zbrojiti isti mjeseci razlićitih godina</p>
 
         <canvas id="daily-reports" width="300" height="100"></canvas>
