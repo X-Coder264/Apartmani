@@ -26,7 +26,7 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a moderator index page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,7 +60,7 @@ class ModeratorController extends Controller
      */
     public function show($slug)
     {
-        Log::info('POkazuje Aprtman.', ['apartment' => $slug]);
+        //Log::info('POkazuje Aprtman.', ['apartment' => $slug]);
 
         $apartment = Apartment::where('slug', '=', $slug)->first();
         return view('admin.moderator-apartment', ['apartment' => $apartment ]);
@@ -71,9 +71,9 @@ class ModeratorController extends Controller
      * Updates apartments validation value in database, depending if it passed validation or not.
      * Sends users e-mail about validation results.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $slug
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $slug)
     {

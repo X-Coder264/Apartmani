@@ -2,6 +2,7 @@
 
 @section('stylesheets')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -10,6 +11,9 @@
 
     <div class="container">
         <h1>Statistike</h1>
+
+        <p>Prikazuju se stvoreni broj korisnika ili apartmana za odabrano razdoblje.</p>
+        <p>Za dane nema smisla birati raspon veći od mjesec dana ili za mjesece veći od godinu dana. U suprotnome će se zbrojiti isti mjeseci razlićitih godina</p>
 
         <canvas id="daily-reports" width="300" height="100"></canvas>
 
@@ -50,6 +54,28 @@
                 </div>
 
             </form>
+    </div>
+
+    <br> <br> <br>
+    <div class="container well">
+        <h3 style="text-align: center">Tablični prikaz grafa</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ $rangeType }}</th>
+                    <th>NUMBER</th>
+                </tr>
+            </thead>
+        @foreach($range as $i => $ran)
+                <tr>
+                    <td>{{ $i+1 }}</td>
+                    <td>{{ date("F", mktime(0, 0, 0, $ran, 1)) }}</td>
+                    <td>{{ $number[$i] }}</td>
+                </tr>
+        @endforeach
+        </table>
+
     </div>
 
 </div>

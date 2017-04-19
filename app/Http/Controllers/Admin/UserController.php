@@ -22,7 +22,7 @@ class UserController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
+     * Shows users index page
      *
      * @return \Illuminate\Http\Response
      */
@@ -66,8 +66,8 @@ class UserController extends Controller
     /**
      * Show users page for editing
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($slug)
     {
@@ -76,11 +76,11 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates users email and role
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $slug
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $slug)
     {
@@ -95,10 +95,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Shows form for editing users ads
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param null $slugUser
+     * @param null $slugApartment
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($slugUser = null, $slugApartment = null)
     {
@@ -109,11 +110,12 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates users ad in database
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $slugUser
+     * @param $slugApartment
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function updateApartment(Request $request, $slugUser, $slugApartment)
     {

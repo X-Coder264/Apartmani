@@ -21,9 +21,9 @@ class ReportController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Show reports index page with data for month in current year
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -39,7 +39,7 @@ class ReportController extends Controller
 
     /**
      * Filter the data shown in graph.
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -50,7 +50,7 @@ class ReportController extends Controller
         $dateEnd="";
         $operator="AND";
 
-
+        //Extracts from date range to dates
         for ($i=0;$i<strlen($request->daterange);$i++){
             $dateEnd .= $request->daterange[$i];
                 if ($i == 9){
@@ -59,13 +59,12 @@ class ReportController extends Controller
                     $i= $i+3;
                 }
         }
-
-
         $passDateEnd = $dateEnd;
         $passDateStart = $dateStart;
         $dateEnd = Carbon::createFromFormat('d.m.Y', $dateEnd)->toDateString();
         $dateStart = Carbon::createFromFormat('d.m.Y', $dateStart)->toDateString();
 
+        //If start date is larger than end date, logic is inverted
         if($rangeType == "YEAR"){
             if ($dateEnd[0].$dateEnd[1].$dateEnd[2].$dateEnd[3] < $dateStart[0].$dateStart[1].$dateStart[2].$dateStart[3]){
                 $operator="OR";
@@ -80,6 +79,7 @@ class ReportController extends Controller
             }
         }
 
+        //Gets data from database, from chosen collection in time range
         if ($data == "Apartment") {
             $query = Apartment::selectRaw('' . $rangeType . '(created_at) as type, count(id) as number')
                 ->where('created_at', '>=', ''.$dateStart.'')
@@ -96,12 +96,6 @@ class ReportController extends Controller
                 ->get();
         }
 
-
-        /*$range = Apartment::selectRaw(''.$rangeType.'(created_at) as type, count(id) as number')
-                    ->where('created_at', '>=', ''.$dateStart.'')
-                    ->where('created_at', '<=', ''.$dateEnd.'')
-                    ->groupBY('type')
-                    ->pluck('type');*/
 
         return view('admin.report', ['range'=>$query->pluck('type'), 'number'=>$query->pluck('number'), 'dateStart'=>$passDateStart, 'dateEnd'=>$passDateEnd, 'data'=>$data, 'rangeType'=>$rangeType]);
     }
