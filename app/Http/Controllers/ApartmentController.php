@@ -163,6 +163,7 @@ class ApartmentController extends Controller
             $apartment->description = $request->description;
             $apartment->county_id = $request->county_id;
             $apartment->stars = $request->stars;
+            $apartment->validation = 0;
             $apartment->save();
             return back()->with('success', "Promjene su uspješno spremljene.");
         } else {
