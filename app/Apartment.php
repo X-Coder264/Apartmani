@@ -112,6 +112,6 @@ class Apartment extends Model
      */
     public function scopeActive($query)
     {
-        return $query->where('active_until', '>=', Carbon::now());
+        return $query->where('active_until', '>=', Carbon::now())->where('validation', '=', 1);
     }
 }
