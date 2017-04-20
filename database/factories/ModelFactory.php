@@ -46,6 +46,7 @@ $factory->define(App\Apartment::class, function (Faker\Generator $faker) {
         'description' => $faker->text(150),
         'price' => $faker->numberBetween(1, 2000),
         'active_until' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+1 months'),
+        'validation' => 1,
         'created_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     ];
 });

@@ -23,6 +23,7 @@ class ApartmentsTableSeeder extends Seeder
             'stars' => 3,
             'description' => 'Najbolji apartman za ovu cijenu.',
             'price' => 200,
+            'validation' => 1,
             'active_until' => Carbon::now()->addDays(30),
         ]);
 
@@ -33,6 +34,7 @@ class ApartmentsTableSeeder extends Seeder
             'stars' => 5,
             'description' => 'Najbolji apartman u državi.',
             'price' => 500,
+            'validation' => 1,
             'active_until' => Carbon::now()->addDays(30),
         ]);
 
