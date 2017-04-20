@@ -83,7 +83,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button style="margin-top:25px;" type="button" class="btn btn-default btn-block pull-left" aria-label="Filtriraj">
+                                    <button style="margin-top:25px;" type="submit" class="btn btn-default btn-block pull-left" aria-label="Filtriraj">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;Filtriraj
                                     </button>
                                     <div class="clearfix"></div>
@@ -167,12 +167,13 @@
                                 <div class="list-description">
                                     <p>{{ $apartment->description }}</p>
                                 </div>
-                                <span style="color:#999;font-size:13px;margin-top:10px">Objavljeno: {{ $apartment->created_at->diffForHumans() }}</span>
+                                <span style="color:#999;font-size:13px;margin-top:10px">Objavljeno: {{ $apartment->created_at->diffForHumans() }}</span> <br>
+                                <span style="color:#999;font-size:13px;margin-top:10px">Oglas traje do: {{ $apartment->created_at->addDays(30) }}</span>
                             </div>
                             <div class="price">
-                                <span class="d-block" style="color:#656565; font-size:15px;">{{$apartment->EUR_price}} €</span>
-                                <span class="d-block"> ~ </span>
                                 <span class="d-block" style="font-size:18px;">{{$apartment->price}} kn</span>
+                                <span class="d-block"> ~ </span>
+                                <span class="d-block" style="color:#656565; font-size:15px;">{{$apartment->EUR_price}} €</span>
                             </div>
                         </div>
                     </div>
