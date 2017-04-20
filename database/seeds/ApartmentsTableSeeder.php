@@ -1,6 +1,7 @@
 <?php
 
 use App\Apartment;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +23,7 @@ class ApartmentsTableSeeder extends Seeder
             'stars' => 3,
             'description' => 'Najbolji apartman za ovu cijenu.',
             'price' => 200,
+            'active_until' => Carbon::now()->addDays(30),
         ]);
 
         Apartment::create([
@@ -31,6 +33,7 @@ class ApartmentsTableSeeder extends Seeder
             'stars' => 5,
             'description' => 'Najbolji apartman u državi.',
             'price' => 500,
+            'active_until' => Carbon::now()->addDays(30),
         ]);
 
         factory(App\Apartment::class, 50)->create();

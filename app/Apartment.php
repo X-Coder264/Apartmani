@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Carbon\Carbon;
 
 class Apartment extends Model
 {
@@ -17,7 +18,7 @@ class Apartment extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'county_id', 'price', 'description', 'stars'
+        'name', 'county_id', 'price', 'description', 'stars', 'active_until'
     ];
 
     /**
@@ -101,5 +102,16 @@ class Apartment extends Model
     public function scopeThisYear($query)
     {
         return $query->where('created_at', '>=', Carbon::now()->firstOfYear());
+    }
+
+    /**
+     * Filter a result set.
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active_until', '>=', Carbon::now());
     }
 }

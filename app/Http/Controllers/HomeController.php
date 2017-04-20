@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\County;
 use App\Apartment;
 use App\ApartmentFilters;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -20,9 +21,9 @@ class HomeController extends Controller
     public function index(ApartmentFilters $filters)
     {
         if (empty($filters->filters())) {
-            $apartments = Apartment::orderBy('created_at', 'desc')->paginate(12);
+            $apartments = Apartment::active()->orderBy('created_at', 'desc')->paginate(12);
         } else {
-            $apartments = Apartment::filter($filters);
+            $apartments = Apartment::active()->filter($filters);
         }
 
         $counties = County::all();

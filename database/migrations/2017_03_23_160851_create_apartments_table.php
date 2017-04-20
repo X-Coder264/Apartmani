@@ -26,6 +26,7 @@ class CreateApartmentsTable extends Migration
             $table->string('main_image')->default('');
             $table->boolean('premium')->default(false);
             $table->tinyInteger('validation')->default(0);
+            $table->timestamp('active_until');
             $table->string('slug');
             $table->timestamps();
         });

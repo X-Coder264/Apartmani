@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('profile', 'ProfileController@index')->name('profile.index');
     Route::get('/apartments/create', 'ApartmentController@create')->name('apartments.create');
     Route::post('/apartments/store', 'ApartmentController@store')->name('apartments.store');
     Route::get('/apartments/{apartment}/edit', 'ApartmentController@edit')->name('apartments.edit');
@@ -25,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
+
+Route::get('/user/{user}/apartments/datatable/ads/{type}', 'ProfileController@showApartmentsDatatable')->name('user.apartments.datatable');
 
 /*Admin*/
 Route::get('/admin/moderator', ['as' => 'admin.moderator.index', 'uses' => 'Admin\ModeratorController@index',]);

@@ -55,6 +55,7 @@ class ApartmentController extends Controller
         }
 
         $data = $request->except('images');
+        $data["active_until"] = Carbon::now()->addDays(30);
         $apartment = Auth::user()->apartments()->create($data);
 
         $images = collect($request->file('images'));
