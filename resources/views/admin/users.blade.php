@@ -17,7 +17,7 @@
             <div id="users-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer ">
 
                 <div class="panel-body flip-scroll">
-                    <table class="table table-bordered table-hover flip-content" id="moderator-table">
+                    <table class="table table-bordered table-hover flip-content" id="users-table">
                         <thead>
                         <tr class="filters">
                             <th>Id</th>
@@ -48,7 +48,7 @@
 
     <script>
         $(function() {
-            $('#moderator-table').DataTable({
+            $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{route ('admin.users.datatable')}}',

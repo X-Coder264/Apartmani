@@ -12,12 +12,12 @@
 
     <div class="col-md-8">
 
-        <h3>Moderator</h3>
+        <h3>Moderiranje oglasa</h3>
 
         <div id="users-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer ">
 
             <div class="panel-body flip-scroll">
-                <table class="table table-bordered table-hover flip-content" id="users-table">
+                <table class="table table-bordered table-hover flip-content" id="ads-table">
                     <thead>
                     <tr class="filters">
                         <th>Id</th>
@@ -48,7 +48,7 @@
 
 <script>
     $(function() {
-        $('#users-table').DataTable({
+        $('#ads-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{route ('admin.moderator.datatable')}}',
