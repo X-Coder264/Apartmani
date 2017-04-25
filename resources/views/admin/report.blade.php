@@ -8,6 +8,7 @@
 <div class="row">
     @include('partials.navigation-admin')
 
+    <div class="container col-md-8">
     <div class="container">
         <h1>Statistike</h1>
 
@@ -56,7 +57,7 @@
     </div>
 
     <br> <br> <br>
-    <div class="container well">
+    <div class="container  well">
         <h3 style="text-align: center">Tablični prikaz grafa</h3>
         <table class="table">
             <thead>
@@ -76,7 +77,7 @@
         </table>
 
     </div>
-
+    </div>
 </div>
 @stop
 

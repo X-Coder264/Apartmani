@@ -48,7 +48,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container col-md-8 col-md-offset-2" style="text-align: center">
 
         <section class="content">
             @if (session('success'))
@@ -60,7 +60,9 @@
                 </div>
             </div>
             @endif
-        {{$apartment->name}} - {{$apartment->user->name}} <br>
+
+            <h2>{{$apartment->name}}</h2>
+                <h5>Korsinik: {{$apartment->user->name}}</h5>
 
          @if($number_of_ratings)
              <div>Prosječna ocjena: {{$average_rating}}  Broj glasova: {{$number_of_ratings}}</div>
@@ -68,21 +70,26 @@
              <div>Ovaj apartman još nije ocijenjen.</div>
          @endif
 
-        <div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
-            <div class="slides"></div>
-            <h3 class="title"></h3>
-            <a class="prev">‹</a>
-            <a class="next">›</a>
-            <a class="play-pause"></a>
-            <ol class="indicator"></ol>
-        </div>
+        @if($apartment->main_image != "")
+            <div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+        @endif
+            <div class="row well">
+                <p>{{$apartment->description}}</p>
+            </div>
 
          @if(isset($dates) && ! empty($dates))
-         <div id="datepicker"></div>
+                <div class="row" id="datepicker"></div>
          @endif
 
         @if(Auth::check())
-        <div class="row">
+        <div class="row" >
             <form method="POST" action="{{route("apartments.rate", $apartment)}}" id="rating">
                 {{ csrf_field() }}
                 <fieldset class="rating">
@@ -111,11 +118,13 @@
         </div>
 
                 @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
-                    <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a>
+                    <div class="row" >
+                        <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a>
+                    </div>
                 @endif
 
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="row" style="text-align: center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-md-offset-3">
                 <form method="POST" action="{{route("comments.store", $apartment)}}">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -131,8 +140,8 @@
         </div>
         @endif
 
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="row well">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-md-offset-3">
                     @foreach($apartment->comments as $comment)
                         <div class="row">
                             {{$comment->comment}} - {{$comment->user->name}} - {{$comment->created_at->diffForHumans()}}
