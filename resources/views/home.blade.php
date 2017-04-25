@@ -161,8 +161,9 @@
                             <div class="image">
                                 @if($apartment->main_image == "")
                                     <img src="/imgs/logo.png" alt="{{ $apartment->name }}" height="200">
-                                @endif
+                                @else
                                 <img src="/apartment_images/{{$apartment->slug}}/{{ $apartment->main_image }}" alt="{{ $apartment->name }}">
+                                @endif
                             </div>
                             <div class="description">
                                 <h4>{{ $apartment->name }}</h4>
