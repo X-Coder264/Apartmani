@@ -59,8 +59,10 @@ class ProfileController extends Controller
 
         return Datatables::of($apartments)
             ->addColumn('action', function ($apartments) use ($user) {
-                $action = '<a href="'.route("apartments.edit", $apartments->slug).'" class="btn btn-xs btn-primary"> Izmijeni ovaj oglas </a>';
+                $action = '<div class="btn-group">';
+                $action .= '<a href="'.route("apartments.edit", $apartments->slug).'" class="btn btn-primary"> Izmijeni ovaj oglas </a>';
                 $action .= '<form action="'.route("apartments.destroy", $apartments->slug).'" method="POST">' . csrf_field() . '<input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger" name="button" value="delete">Obriši ovaj oglas</button></form>';
+                $action .= '</div>';
                 return $action;
             })
             ->make(true);
