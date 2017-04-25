@@ -21,6 +21,8 @@ class Apartment extends Model
         'name', 'county_id', 'price', 'description', 'stars', 'active_until'
     ];
 
+    protected $dates = ['active_until'];
+
     /**
      * Return the sluggable configuration array for this model.
      *

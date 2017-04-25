@@ -104,31 +104,33 @@
 
         @if(Auth::check())
         <div class="row" >
-            <form method="POST" action="{{route("apartments.rate", $apartment)}}" id="rating">
-                {{ csrf_field() }}
-                <fieldset class="rating">
-                    <input type="radio" id="star5" name="rating" value="5.0" @if($current_user_rated && $user_rating == 5.0) checked @endif>
-                    <label class="full" for="star5" title="Savršeno - ocjena 5"></label>
-                    <input type="radio" id="star4half" name="rating" value="4.5" @if($current_user_rated && $user_rating == 4.5) checked @endif>
-                    <label class="half" for="star4half" title="Odlično - ocjena 4.5"></label>
-                    <input type="radio" id="star4" name="rating" value="4.0" @if($current_user_rated && $user_rating == 4.0) checked @endif>
-                    <label class="full" for="star4" title="Jako dobro - ocjena 4"></label>
-                    <input type="radio" id="star3half" name="rating" value="3.5" @if($current_user_rated && $user_rating == 3.5) checked @endif>
-                    <label class="half" for="star3half" title="Dobro - ocjena 3.5"></label>
-                    <input type="radio" id="star3" name="rating" value="3.0" @if($current_user_rated && $user_rating == 3.0) checked @endif>
-                    <label class="full" for="star3" title="Prosječno - ocjena 3"></label>
-                    <input type="radio" id="star2half" name="rating" value="2.5" @if($current_user_rated && $user_rating == 2.5) checked @endif>
-                    <label class="half" for="star2half" title="Ispodprosječno - ocjena 2.5"></label>
-                    <input type="radio" id="star2" name="rating" value="2.0" @if($current_user_rated && $user_rating == 2.0) checked @endif>
-                    <label class="full" for="star2" title="Loše - ocjena 2"></label>
-                    <input type="radio" id="star1half" name="rating" value="1.5" @if($current_user_rated && $user_rating == 1.5) checked @endif>
-                    <label class="half" for="star1half" title="Jako loše - ocjena 1.5"></label>
-                    <input type="radio" id="star1" name="rating" value="1.0" @if($current_user_rated && $user_rating == 1.0) checked @endif>
-                    <label class="full" for="star1" title="Užasno - ocjena 1"></label>
-                    <input type="radio" id="starhalf" name="rating" value="0.5" @if($current_user_rated && $user_rating == 0.5) checked @endif>
-                    <label class="half" for="starhalf" title="Katastrofa - ocjena 0.5"></label>
-                </fieldset>
-            </form>
+            <div class="col-md-6 col-md-offset-5">
+                <form method="POST" action="{{route("apartments.rate", $apartment)}}" id="rating">
+                    {{ csrf_field() }}
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5.0" @if($current_user_rated && $user_rating == 5.0) checked @endif>
+                        <label class="full" for="star5" title="Savršeno - ocjena 5"></label>
+                        <input type="radio" id="star4half" name="rating" value="4.5" @if($current_user_rated && $user_rating == 4.5) checked @endif>
+                        <label class="half" for="star4half" title="Odlično - ocjena 4.5"></label>
+                        <input type="radio" id="star4" name="rating" value="4.0" @if($current_user_rated && $user_rating == 4.0) checked @endif>
+                        <label class="full" for="star4" title="Jako dobro - ocjena 4"></label>
+                        <input type="radio" id="star3half" name="rating" value="3.5" @if($current_user_rated && $user_rating == 3.5) checked @endif>
+                        <label class="half" for="star3half" title="Dobro - ocjena 3.5"></label>
+                        <input type="radio" id="star3" name="rating" value="3.0" @if($current_user_rated && $user_rating == 3.0) checked @endif>
+                        <label class="full" for="star3" title="Prosječno - ocjena 3"></label>
+                        <input type="radio" id="star2half" name="rating" value="2.5" @if($current_user_rated && $user_rating == 2.5) checked @endif>
+                        <label class="half" for="star2half" title="Ispodprosječno - ocjena 2.5"></label>
+                        <input type="radio" id="star2" name="rating" value="2.0" @if($current_user_rated && $user_rating == 2.0) checked @endif>
+                        <label class="full" for="star2" title="Loše - ocjena 2"></label>
+                        <input type="radio" id="star1half" name="rating" value="1.5" @if($current_user_rated && $user_rating == 1.5) checked @endif>
+                        <label class="half" for="star1half" title="Jako loše - ocjena 1.5"></label>
+                        <input type="radio" id="star1" name="rating" value="1.0" @if($current_user_rated && $user_rating == 1.0) checked @endif>
+                        <label class="full" for="star1" title="Užasno - ocjena 1"></label>
+                        <input type="radio" id="starhalf" name="rating" value="0.5" @if($current_user_rated && $user_rating == 0.5) checked @endif>
+                        <label class="half" for="starhalf" title="Katastrofa - ocjena 0.5"></label>
+                    </fieldset>
+                </form>
+            </div>
         </div>
 
         <div class="row" style="text-align: center">

@@ -73,7 +73,7 @@
                             <li><a href="{{ route('login') }}"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>&nbsp;&nbsp;Prijava</a></li>
                             <li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-registration-mark" aria-hidden="true"></i>&nbsp;&nbsp;Registracija</a></li>
                         @else
-                            @if(Auth::user()->role->role == "Admin")
+                            @if(Auth::user()->role->role == "Admin" || Auth::user()->role->role == "Moderator")
                                 <li><a href="{{ route('admin.moderator.index') }}">Admin CP</a></li>
                             @endif
 

@@ -32,7 +32,7 @@ class HomeController extends Controller
             if (Cache::has('apartment.' . $apartment->slug . '.EUR_price')) {
                 $apartment->EUR_price = Cache::get('apartment.' . $apartment->slug . '.EUR_price');
             } else {
-                $apartment->EUR_price = round($apartment->price * get_EUR_exchange_rate(), 2);
+                $apartment->EUR_price = round($apartment->price / get_EUR_exchange_rate(), 2);
                 Cache::put('apartment.' . $apartment->slug . '.EUR_price', $apartment->EUR_price, 24 * 60);
             }
         }
