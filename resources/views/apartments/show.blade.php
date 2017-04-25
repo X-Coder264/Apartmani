@@ -64,7 +64,7 @@
             <h2>{{$apartment->name}}</h2>
                 <h5>Korisnik: {{$apartment->user->name}}</h5>
 
-            @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
+            @if(Auth::check() && (Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin"))
                     <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a> <br><br>
             @endif
 
