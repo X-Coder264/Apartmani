@@ -55,6 +55,6 @@ function setActive($path)
     if (Request::is($path)) {
         return 'class="active"';
     } else {
-        return '5';
+        return '';
     }
 }
