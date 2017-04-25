@@ -77,8 +77,6 @@
             <ol class="indicator"></ol>
         </div>
 
-        <div id="links"></div>
-
          @if(isset($dates) && ! empty($dates))
          <div id="datepicker"></div>
          @endif
@@ -173,7 +171,6 @@
             dataType: 'json'
         }).done(function (result) {
             var carouselLinks = [];
-            var linksContainer = $('#links');
             $.each(result, function (index) {
                 carouselLinks.push({
                     href: result[index]
