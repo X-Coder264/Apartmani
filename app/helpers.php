@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Request;
 
 function get_exchange_rates()
 {
@@ -47,4 +48,13 @@ function get_USD_exchange_rate()
         }
     }
     return $usd;
+}
+
+function setActive($path)
+{
+    if (Request::is($path)) {
+        return 'class="active"';
+    } else {
+        return '5';
+    }
 }
