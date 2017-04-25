@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/apartments/store', 'ApartmentController@store')->name('apartments.store');
     Route::get('/apartments/{apartment}/edit', 'ApartmentController@edit')->name('apartments.edit');
     Route::post('/apartments/{apartment}', 'ApartmentController@update')->name('apartments.update');
+    Route::delete('/apartments/{apartment}', 'ApartmentController@delete')->name('apartments.destroy');
     Route::post('/apartments/{apartment}/comment/store', 'CommentController@store')->name('comments.store');
     Route::post('/apartments/{apartment}/rate', 'RatingController@store')->name('apartments.rate');
 });

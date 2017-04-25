@@ -171,6 +171,22 @@ class ApartmentController extends Controller
         }
     }
 
+    /**
+     * Delete the apartment.
+     *
+     * @param  Apartment $apartment
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Apartment $apartment)
+    {
+        if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin") {
+            $apartment->delete();
+            return back()->with('success', "Oglas je uspješno obrisan.");
+        } else {
+            return back()->with('error', "Nemate prava za obrisati ovaj oglas.");
+        }
+    }
+
     public function getImages(Apartment $apartment)
     {
         $apartment->load('images');
