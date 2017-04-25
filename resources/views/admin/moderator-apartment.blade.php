@@ -5,7 +5,6 @@
     @include('partials.navigation-admin')
 
     <div class="container col-md-8" style="text-align: center">
-
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title"> {{ $apartment -> name }} </h3>

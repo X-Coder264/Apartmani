@@ -10,31 +10,35 @@
 
         @include('partials.navigation-admin')
 
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Korisnici</h4>
+                    </div>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body flip-scroll">
+                        <div id="users-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer ">
+                            <table class="table table-bordered table-hover flip-content" id="users-table">
+                                <thead>
+                                <tr class="filters">
+                                    <th>Id</th>
+                                    <th>Ime</th>
+                                    <th>E-mail</th>
+                                    <th>Role</th>
+                                    <th>Opcije</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-            <h3>Korisnici</h3>
 
-            <div id="users-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer ">
-
-                <div class="panel-body flip-scroll">
-                    <table class="table table-bordered table-hover flip-content" id="users-table">
-                        <thead>
-                        <tr class="filters">
-                            <th>Id</th>
-                            <th>Ime</th>
-                            <th>E-mail</th>
-                            <th>Role</th>
-                            <th>Opcije</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 

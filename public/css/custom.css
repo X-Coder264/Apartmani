@@ -32,7 +32,7 @@ body {
 .panel-default>.panel-heading {
     color: #6D6D6D;
     background-color: #FFC900;
-    border-bottom: 3px solid #6D6D6D;
+    border-bottom: 1px solid #6D6D6D;
 }
 
 .has-tree {
@@ -180,7 +180,7 @@ body {
     -o-transition: all 0.5s ease 0s;
     -ms-transition: all 0.5s ease 0s;
     padding-right: 20px;
-    background: #fff;
+    background: #FFF;
 }
 
 .image {
@@ -287,4 +287,47 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #454545;
+}
+
+.nav-pills>li>a {
+    border-radius: 0px;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #FFF;
+    background-color: #6D6D6D;
+}
+
+.nav-stacked>li+li {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #6D6D6D;
+}
+
+.panel-body {
+    padding: 15px;
+    background-color: #FFC900;
+}
+
+.table-hover>tbody>tr:hover {
+    background-color: #6D6D6D;
+    color: #FFF;
+}
+
+body {
+    font-family: Raleway,sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+    background-color: #f5f8fa;
+}
+
+.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #6D6D6D;
 }
