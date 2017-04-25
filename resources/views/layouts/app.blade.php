@@ -55,7 +55,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <div class="navbar-brand" href="{{ url('/') }}">
+                    <div class="navbar-brand">
                         <a href="{{ route('index') }}"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>&nbsp;&nbsp;{{ config('app.name', 'Laravel') }}</a>
                     </div>
                 </div>
@@ -89,6 +89,10 @@
 
                                     <li>
                                         <a href="{{ route('profile.index') }}">Profil</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('profile.edit', Auth::user()) }}">Uredi profil</a>
                                     </li>
 
                                     <li>

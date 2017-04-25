@@ -16,6 +16,37 @@ class ProfileController extends Controller
         return view('profile', compact('user'));
     }
 
+    /**
+     * Show the apartment edit form.
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        return view('profile-edit', compact('user'));
+    }
+
+    /**
+     * Update the user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        if(Auth::user()->id === $user->id || Auth::user()->role->role == "Admin") {
+            // TODO: add validation
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->save();
+            return back()->with('success', "Promjene su uspješno spremljene.");
+        } else {
+            return back()->with('error', "Nemate prava za izmjeniti ovaj profil.");
+        }
+    }
+
     public function showApartmentsDatatable(User $user, $type){
         $user->load('apartments');
         if($type == 1) {

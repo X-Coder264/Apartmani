@@ -17,6 +17,8 @@ Route::get('/', 'HomeController@index')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', 'ProfileController@index')->name('profile.index');
+    Route::get('profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::put('profile/{user}', 'ProfileController@update')->name('profile.update');
     Route::get('/apartments/create', 'ApartmentController@create')->name('apartments.create');
     Route::post('/apartments/store', 'ApartmentController@store')->name('apartments.store');
     Route::get('/apartments/{apartment}/edit', 'ApartmentController@edit')->name('apartments.edit');
