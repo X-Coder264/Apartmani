@@ -17,7 +17,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the apartment edit form.
+     * Show the user edit form.
      *
      * @param User $user
      * @return \Illuminate\Http\Response
