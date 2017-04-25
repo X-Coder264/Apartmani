@@ -160,9 +160,9 @@
                         <div class="product">
                             <div class="image">
                                 @if($apartment->main_image == "")
-                                    <img src="/imgs/logo.png" alt="{{ $apartment->name }}" height="200">
+                                    <img src="/imgs/logo.png" alt="{{ $apartment->name }}" class="img-responsive">
                                 @else
-                                <img src="/apartment_images/{{$apartment->slug}}/{{ $apartment->main_image }}" alt="{{ $apartment->name }}">
+                                <img src="/apartment_images/{{$apartment->slug}}/{{ $apartment->main_image }}" alt="{{ $apartment->name }}" class="img-responsive">
                                 @endif
                             </div>
                             <div class="description">

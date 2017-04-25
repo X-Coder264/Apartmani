@@ -62,7 +62,19 @@
             @endif
 
             <h2>{{$apartment->name}}</h2>
-                <h5>Korsinik: {{$apartment->user->name}}</h5>
+                <h5>Korisnik: {{$apartment->user->name}}</h5>
+
+            @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
+                    <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a> <br><br>
+            @endif
+
+        {{--    @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
+                <form action="{{route("apartments.destroy", $apartment->slug)}}" method="POST">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <button type="submit" class="btn btn-danger" name="button" value="delete">Obriši ovaj oglas</button>
+                </form>
+            @endif --}}
 
          @if($number_of_ratings)
              <div>Prosječna ocjena: {{$average_rating}}  Broj glasova: {{$number_of_ratings}}</div>
@@ -85,7 +97,9 @@
             </div>
 
          @if(isset($dates) && ! empty($dates))
-                <div class="row" id="datepicker"></div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-5" id="datepicker"></div>
+                </div>
          @endif
 
         @if(Auth::check())
@@ -117,12 +131,6 @@
             </form>
         </div>
 
-                @if(Auth::user()->id === $apartment->user_id || Auth::user()->role->role == "Admin")
-                    <div class="row" >
-                        <a href="{{route('apartments.edit', $apartment)}}" class="btn btn-primary">Editiraj oglas</a>
-                    </div>
-                @endif
-
         <div class="row" style="text-align: center">
             <div class="col-lg-6 col-md-6 col-sm-6 col-md-offset-3">
                 <form method="POST" action="{{route("comments.store", $apartment)}}">
@@ -133,7 +141,7 @@
                                   class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block">Pošalji</button>
                     </div>
                 </form>
             </div>
