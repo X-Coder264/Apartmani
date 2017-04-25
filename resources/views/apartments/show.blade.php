@@ -150,6 +150,7 @@
         </div>
         @endif
 
+            @if(count($apartment->comments))
             <div class="row well">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-md-offset-3">
                     @foreach($apartment->comments as $comment)
@@ -159,6 +160,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
 
         </section>
     </div>
