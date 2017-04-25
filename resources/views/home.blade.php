@@ -159,8 +159,10 @@
                     <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6 list-view" onclick="window.location='{{ route("apartments.show", $apartment) }}';">
                         <div class="product">
                             <div class="image">
-                                <img src="/imgs/logo.png" alt="{{ $apartment->name }}" height="200">
-                                {{--<img src="{{ $apartment->main_image }}" alt="{{ $apartment->name }}">--}}
+                                @if($apartment->main_image == "")
+                                    <img src="/imgs/logo.png" alt="{{ $apartment->name }}" height="200">
+                                @endif
+                                <img src="/apartment_images/{{$apartment->slug}}/{{ $apartment->main_image }}" alt="{{ $apartment->name }}">
                             </div>
                             <div class="description">
                                 <h4>{{ $apartment->name }}</h4>

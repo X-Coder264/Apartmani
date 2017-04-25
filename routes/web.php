@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/apartments/{apartment}/rate', 'RatingController@store')->name('apartments.rate');
 });
 
+Route::get('/apartments/{apartment}/images', 'ApartmentController@getImages')->name('apartments.getImages');
 Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
 
 Route::get('/user/{user}/apartments/datatable/ads/{type}', 'ProfileController@showApartmentsDatatable')->name('user.apartments.datatable');

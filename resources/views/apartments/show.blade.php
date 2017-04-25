@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('stylesheets')
-    <link href="/css/bootstrap-datepicker3.standalone.min.css" type="text/css" rel="stylesheet" />
+    <link href="/css/bootstrap-datepicker3.standalone.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
     <style>
         @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
         fieldset, label { margin: 0; padding: 0; }
@@ -64,8 +65,19 @@
          @if($number_of_ratings)
              <div>Prosječna ocjena: {{$average_rating}}  Broj glasova: {{$number_of_ratings}}</div>
          @else
-             <div>Ovaj apartman još nije ocjenjen.</div>
+             <div>Ovaj apartman još nije ocijenjen.</div>
          @endif
+
+        <div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+
+        <div id="links"></div>
 
          @if(isset($dates) && ! empty($dates))
          <div id="datepicker"></div>
@@ -137,6 +149,8 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/blueimp-gallery.min.js"></script>
+
     <script>
         $('#rating input').change(function() {
             $(this).closest('form').submit();
@@ -152,5 +166,25 @@
                 @endforeach
             ]
         });</script>
+
+    <script>
+        $.ajax({
+            url: '{{route('apartments.getImages', $apartment)}}',
+            dataType: 'json'
+        }).done(function (result) {
+            var carouselLinks = [];
+            var linksContainer = $('#links');
+            $.each(result, function (index) {
+                carouselLinks.push({
+                    href: result[index]
+                })
+            });
+            // Initialize the Gallery as image carousel:
+            blueimp.Gallery(carouselLinks, {
+                container: '#blueimp-gallery-carousel',
+                carousel: true
+            })
+        });
+    </script>
 
 @endsection

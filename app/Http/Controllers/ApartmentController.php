@@ -170,4 +170,15 @@ class ApartmentController extends Controller
             return back()->with('error', "Nemate prava za izmjeniti ovaj oglas.");
         }
     }
+
+    public function getImages(Apartment $apartment)
+    {
+        $apartment->load('images');
+        $images[0] = '/apartment_images/' . $apartment->slug . '/' . $apartment->main_image;
+        for($i = 0; $i < count($apartment->images); $i++) {
+            $images[$i + 1] = '/apartment_images/' . $apartment->slug . '/' . $apartment->images[$i]->path;
+        }
+
+        return $images;
+    }
 }
