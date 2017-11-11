@@ -96,7 +96,7 @@ class ReportController extends Controller
                 ->get();
         }
 
-
+        //dd($query->pluck('type'));
         return view('admin.report', ['range'=>$query->pluck('type'), 'number'=>$query->pluck('number'), 'dateStart'=>$passDateStart, 'dateEnd'=>$passDateEnd, 'data'=>$data, 'rangeType'=>$rangeType]);
     }
 

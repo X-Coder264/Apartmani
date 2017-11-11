@@ -13,7 +13,7 @@
         <h1>Statistike</h1>
 
         <p>Prikazuje se stvoreni broj korisnika ili apartmana za odabrano razdoblje.</p>
-        <p>Za dane nema smisla birati raspon veći od mjesec dana ili za mjesece veći od godinu dana. U suprotnome će se zbrojiti isti mjeseci razlićitih godina</p>
+        <p>Za dane nema smisla birati raspon veći od mjesec dana ili za mjesece veći od godinu dana. U suprotnome će se zbrojiti isti mjeseci iz razlićitih godina</p>
 
         <canvas id="daily-reports" width="300" height="100"></canvas>
 
@@ -70,7 +70,7 @@
         @foreach($range as $i => $ran)
                 <tr>
                     <td>{{ $i+1 }}</td>
-                    <td>{{ date("F", mktime(0, 0, 0, $ran, 1)) }}</td>
+                    <td>@if($rangeType == "MONTH"){{ date("F", mktime(0, 0, 0, $ran, 1)) }}@else{{ $ran }}@endif</td>
                     <td>{{ $number[$i] }}</td>
                 </tr>
         @endforeach
